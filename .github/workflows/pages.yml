@@ -4,35 +4,53 @@ on:
     branches:
       - main
 
-name: Quarto Publish
+name: Hugo Publish
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+    working-directory: docs
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.147.9
+      HUGO_ENVIRONMENT: production
+      TZ: Europe/Berlin
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # needed for .GitInfo / .Lastmod
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v4
-      - name: Set up Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
+        uses: actions/configure-pages@v5
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
-          version: 1.4.515
-      - name: Build with Quarto
-        uses: quarto-dev/quarto-actions/render@v2
-        with:
-          to: html # If set, it will be equivalent to `quarto render --to html`
-          path: docs/
+          go-version-file: docs/go.mod
+          cache-dependency-path: docs/go.sum
+      - name: Install Hugo
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
+          sudo dpkg -i ${{ runner.temp }}/hugo.deb
+      - name: Build with Hugo
+        run: |
+          hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/_site
+          path: docs/public
 
   deploy:
     environment:

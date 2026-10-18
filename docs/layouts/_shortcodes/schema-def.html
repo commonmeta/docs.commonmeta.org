@@ -1,0 +1,48 @@
+{{- /*
+Render one definition from the current Commonmeta JSON Schema ($defs).
+
+@param {string} 0 The name of the definition, e.g. "work".
+
+@example {{< schema-def "work" >}}
+*/ -}}
+{{- $schema := partialCached "schema/load.html" . -}}
+{{- $name := .Get 0 -}}
+{{- $def := index (index $schema "$defs") $name -}}
+{{- if not $def -}}
+  {{- errorf "schema-def: no definition %q in commonmeta_v%s.json (%s)" $name site.Params.schemaVersion .Position -}}
+{{- end -}}
+{{- with $def.description }}<p>{{ . }}</p>{{ end -}}
+{{- with $def.oneOf -}}
+  {{- $alts := slice -}}
+  {{- range . -}}
+    {{- $ref := index . "$ref" | default (index (index .allOf 0) "$ref") -}}
+    {{- $alts = $alts | append (partial "schema/type.html" (dict "$ref" $ref)) -}}
+  {{- end -}}
+  <p>One of: {{ delimit $alts ", " | safeHTML }}.</p>
+{{- end -}}
+{{- with $def.anyOf -}}
+  {{- $keys := slice -}}
+  {{- range . }}{{ range .required }}{{ $keys = $keys | append (printf "<code>%s</code>" .) }}{{ end }}{{ end -}}
+  {{- with $keys }}<p>At least one of {{ delimit . ", " | safeHTML }} is required.</p>{{ end -}}
+{{- end -}}
+{{- if and (not $def.properties) $def.type -}}
+  {{- $t := partial "schema/type.html" $def -}}
+  {{- $d := partial "schema/details.html" $def -}}
+  <p>Type: {{ $t | safeHTML }}.{{ with $d }} {{ . | safeHTML }}{{ end }}{{ with $def.minimum }} Minimum: <code>{{ . }}</code>.{{ end }}{{ with $def.maximum }} Maximum: <code>{{ . }}</code>.{{ end }}</p>
+{{- else if $def.properties -}}
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+  {{- $required := $def.required | default slice -}}
+  {{- range $prop, $p := $def.properties }}
+    <tr>
+      <td><code>{{ $prop }}</code>{{ if in $required $prop }}<br><small><strong>required</strong></small>{{ end }}</td>
+      <td>{{ partial "schema/type.html" $p | safeHTML }}</td>
+      <td>{{ with $p.description }}{{ . }} {{ end }}{{ partial "schema/details.html" $p | safeHTML }}</td>
+    </tr>
+  {{- end }}
+  </tbody>
+</table>
+{{- end -}}

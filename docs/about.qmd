@@ -1,3 +1,0 @@
-# About
-
-Commonmeta is a metadata standard for scholarly metadata.

@@ -1,0 +1,7 @@
+/* Commonmeta red (#dc2626) as primary color */
+:root,
+.dark {
+  --primary-hue: 0deg;
+  --primary-saturation: 72%;
+  --primary-lightness: 51%;
+}

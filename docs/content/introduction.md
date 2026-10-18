@@ -1,0 +1,37 @@
+---
+title: Introduction
+weight: 1
+---
+
+Commonmeta is a metadata standard for scholarly metadata. Commonmeta focuses on tools and services, helping them to convert metadata between the various formats. Commonmeta is defined and can be validated with [JSON Schema](/schema/), currently at version {{< schema-version >}}. Supported formats include:
+
+* [BibTeX](https://www.bibtex.com)
+* [RIS](https://en.wikipedia.org/wiki/RIS_(file_format))
+* [CSL-JSON](https://citeproc-js.readthedocs.io/en/latest/csl-json/markup.html)
+* [Crossref](https://gitlab.com/crossref/schema)
+* [DataCite](https://schema.datacite.org)
+* [Schema.org](https://schema.org)
+
+Commonmeta focusses on general bibliographic metadata, rather than metadata for specific disciplines or subdisciplines. BibTex and RIS are widely supported by reference managers, allowing the sharing of metadata for references and reference lists. CSL-JSON is the input format used by the Citation Style Language (CSL) to generate formatted citations in 1000s of citation styles. Crossref and DataCite are DOI registration agencies, enabling the registration of persistent identifiers and associated metadata. Schema.org is a popular schema for structured content on the web (not limited to scholarly resources).
+
+Commonmeta can and should support additional formats for metadata import and/or export.
+
+## Inspiration
+
+Codemeta and Commonmark are important inspirations for Commonmeta, both in name and philosophy. They share these priciples:
+
+{{< callout type="info" >}}
+**Principles**
+
+* driven by real-world implementations and not committees
+* features that focus on what is common in existing implementations/formats
+* a testable specification
+{{< /callout >}}
+
+### Codemeta
+
+[CodeMeta](https://codemeta.github.io/) contributors are creating a minimal metadata schema for science software and code, in JSON and XML. The goal of CodeMeta is to create a concept vocabulary that can be used to standardize the exchange of software metadata across repositories and organizations. CodeMeta started by comparing the software metadata used across multiple repositories, which resulted in the CodeMeta Metadata Crosswalk. That crosswalk was then used to generate a set of software metadata concepts, which were arranged into a JSON-LD context for serialization.
+
+### Commonmark
+
+[Commonmark](https://commonmark.org) is a strongly defined, highly compatible specification of Markdown, along with a suite of comprehensive tests to validate Markdown implementations against this specification.

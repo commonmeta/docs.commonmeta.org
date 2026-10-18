@@ -1,0 +1,21 @@
+{{- /* Render enum values, pattern, and nested properties of a JSON Schema node as HTML. */ -}}
+{{- $p := . -}}
+{{- $out := slice -}}
+{{- if reflect.IsMap $p -}}
+  {{- $node := $p -}}
+  {{- if and (eq $p.type "array") (reflect.IsMap $p.items) }}{{ $node = $p.items }}{{ end -}}
+  {{- with $node.enum -}}
+    {{- $vals := slice -}}
+    {{- range . }}{{ $vals = $vals | append (printf "<code>%s</code>" (htmlEscape .)) }}{{ end -}}
+    {{- $out = $out | append (printf "One of: %s." (delimit $vals ", ")) -}}
+  {{- end -}}
+  {{- with $node.pattern -}}
+    {{- $out = $out | append (printf "Pattern: <code>%s</code>." (htmlEscape .)) -}}
+  {{- end -}}
+  {{- with $node.properties -}}
+    {{- $keys := slice -}}
+    {{- range $k, $_ := . }}{{ $keys = $keys | append (printf "<code>%s</code>" $k) }}{{ end -}}
+    {{- $out = $out | append (printf "Properties: %s." (delimit $keys ", ")) -}}
+  {{- end -}}
+{{- end -}}
+{{- return (delimit $out " ") -}}

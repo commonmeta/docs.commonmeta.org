@@ -1,0 +1,127 @@
+---
+title: Implementations
+weight: 4
+aliases:
+  - /implementations.html
+---
+
+commonmeta-rs and commonmeta-py validate against the same [Commonmeta JSON Schema](/schema/) and run the
+same conformance tests, both maintained in [commonmeta-schema](https://codeberg.org/front-matter/commonmeta-schema).
+
+## commonmeta-rs (Rust)
+
+commonmeta-rs is a Rust library and command-line tool to implement Commonmeta. Use commonmeta-rs to convert scholarly metadata in a variety of formats, listed below. Commonmeta-rs is work in progress, the first release was on June 17, 2026.
+
+Source code: [codeberg.org/front-matter/commonmeta-rs](https://codeberg.org/front-matter/commonmeta-rs)
+
+| Format                                                                                   | Name         | Content Type                            | Read  | Write |
+| ---------------------------------------------------------------------------------------- | ------------ | --------------------------------------- | ----- | ----- |
+| Commonmeta                                                                               | commonmeta   | application/vnd.commonmeta+json         | yes   | yes   |
+| [CrossRef XML](https://www.crossref.org/schema/documentation/unixref1.1/unixref1.1.html) | crossref_xml | application/vnd.crossref.unixref+xml    | yes   | yes   |
+| [Crossref](https://api.crossref.org)                                                     | crossref     | application/vnd.crossref+json           | yes   | yes   |
+| [DataCite](https://api.datacite.org/)                                                    | datacite     | application/vnd.datacite.datacite+json  | yes   | yes   |
+| [DataCite XML](https://api.datacite.org/)                                                            | datacite_xml | application/vnd.datacite.datacite+xml | yes     | yes |
+| [Schema.org (in JSON-LD)](http://schema.org/)                                            | schema_org   | application/vnd.schemaorg.ld+json       | yes   | yes   |
+| [RDF XML](http://www.w3.org/TR/rdf-syntax-grammar/)                                      | rdf_xml      | application/rdf+xml                     | no    | later |
+| [RDF Turtle](http://www.w3.org/TeamSubmission/turtle/)                                   | turtle       | text/turtle                             | no    | later |
+| [CSL-JSON](https://citationstyles.org/)                                                  | csl          | application/vnd.citationstyles.csl+json | yes   | yes   |
+| [Formatted text citation](https://citationstyles.org/)                                   | citation     | text/x-bibliography                     | n/a   | yes   |
+| [Codemeta](https://codemeta.github.io/)                                                  | codemeta     | application/vnd.codemeta.ld+json        | yes   | later |
+| [Citation File Format (CFF)](https://citation-file-format.github.io/)                    | cff          | application/vnd.cff+yaml                | yes   | later |
+| [JATS](https://jats.nlm.nih.gov/)                                                        | jats         | application/vnd.jats+xml                | later | later |
+| [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)                              | csv          | text/csv                                | no    | later |
+| [BibTex](http://en.wikipedia.org/wiki/BibTeX)                                            | bibtex       | application/x-bibtex                    | yes   | yes   |
+| [RIS](http://en.wikipedia.org/wiki/RIS_(file_format))                                    | ris          | application/x-research-info-systems     | yes   | yes   |
+| [InvenioRDM](https://inveniordm.docs.cern.ch/reference/metadata/)                        | inveniordm   | application/vnd.inveniordm.v1+json      | yes   | yes   |
+| [OpenAlex](https://www.openalex.org/)                                                    | openalex     | n/a                                     | yes   | no    |
+
+_commonmeta_: the Commonmeta format is the native format for the library and used internally.
+_later_: we plan to implement this format in a later release.
+
+## commonmeta-py (Python)
+
+commonmeta-py is a Python library to implement Commonmeta. Use commonmeta-py to convert scholarly metadata in a variety of formats, listed below. Commonmeta-py is work in progress, the first release on PyPi (version 0.5.0) was on February 16, 2023.
+
+[![PyPI version](https://img.shields.io/pypi/v/commonmeta-py.svg)](https://pypi.org/project/commonmeta-py/)
+
+| Format                                                                                           | Name          | Content Type                           | Read    | Write   |
+| ------------------------------------------------------------------------------------------------ | ------------- | -------------------------------------- | ------- | ------- |
+| [Commonmeta](https://commonmeta.org)                                                             | commonmeta    | application/vnd.commonmeta+json        | yes     | yes     |
+| [CrossRef Unixref XML](https://www.crossref.org/schema/documentation/unixref1.1/unixref1.1.html) | crossref_xml  | application/vnd.crossref.unixref+xml   | yes     | yes |
+| [Crossref](https://api.crossref.org)                                                             | crossref      | application/vnd.crossref+json          | yes     | no      |
+| [DataCite XML](https://schema.datacite.org/)                                                     | datacite_xml  | application/vnd.datacite.datacite+xml  | planned | later   |
+| [DataCite](https://api.datacite.org/)                                                            | datacite      | application/vnd.datacite.datacite+json | yes     | yes     |
+| [Schema.org (in JSON-LD)](http://schema.org/)                                                    | schema_org    | application/vnd.schemaorg.ld+json      | yes     | yes     |
+| [RDF XML](http://www.w3.org/TR/rdf-syntax-grammar/)                                              | rdf_xml       | application/rdf+xml                    | no      | later   |
+| [RDF Turtle](http://www.w3.org/TeamSubmission/turtle/)                                           | turtle        | text/turtle                            | no      | later   |
+| [CSL-JSON](https://citationstyles.org/)                                                          | csl           | application/vnd.citationstyles.csl+json | later  | yes     |
+| [Formatted text citation](https://citationstyles.org/)                                           | citation      | text/x-bibliography                    | no      | yes     |
+| [Codemeta](https://codemeta.github.io/)                                                          | codemeta      | application/vnd.codemeta.ld+json       | yes     | later   |
+| [Citation File Format (CFF)](https://citation-file-format.github.io/)                            | cff           | application/vnd.cff+yaml               | yes     | later   |
+| [JATS](https://jats.nlm.nih.gov/)                                                                | jats          | application/vnd.jats+xml               | later   | later   |
+| [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)                                       | csv           | text/csv                               | no      | later   |
+| [BibTex](http://en.wikipedia.org/wiki/BibTeX)                                                    | bibtex        | application/x-bibtex                   | later   | yes     |
+| [RIS](http://en.wikipedia.org/wiki/RIS_(file_format))                                            | ris           | application/x-research-info-systems    | later   | yes     |
+| [InvenioRDM](https://inveniordm.docs.cern.ch/reference/metadata/)                                | inveniordm    | application/vnd.inveniordm.v1+json     | yes     | later   |
+| [JSON Feed](https://www.jsonfeed.org/)                                                           | json_feed_item | application/feed+json                 | yes     | later   |
+
+_commonmeta_: the Commonmeta format is the native format for the library and used internally.  
+_Planned_: we plan to implement this format for the `0.9` release.  
+_Later_: we plan to implement this format in a later release.
+
+## commonmeta-ruby (Ruby)
+
+commonmeta-ruby is a rewrite (and rename) of the Briard Ruby Gem, which in turn was based on the [Bolognese Gem](https://rubygems.org/gems/bolognese).
+
+[![Gem Version](https://badge.fury.io/rb/commonmeta-ruby.svg)](https://badge.fury.io/rb/commonmeta-ruby)
+
+| Format                                                                                           | Name          | Content Type                           | Read    | Write   |
+| ------------------------------------------------------------------------------------------------ | ------------- | -------------------------------------- | ------- | ------- |
+| [Commonmeta](https://commonmeta.org)                                                             | commonmeta    | application/vnd.commonmeta+json        | yes     | yes     |
+| [CrossRef Unixref XML](https://www.crossref.org/schema/documentation/unixref1.1/unixref1.1.html) | crossref_xml  | application/vnd.crossref.unixref+xml   | yes     | yes     |
+| [Crossref](https://api.crossref.org)                                                             | crossref      | application/vnd.crossref+json          | yes     | no      |
+| [DataCite XML](https://schema.datacite.org/)                                                     | datacite_xml  | application/vnd.datacite.datacite+xml  | yes     | yes     |
+| [DataCite](https://api.datacite.org/)                                                            | datacite      | application/vnd.datacite.datacite+json | yes     | yes     |
+| [Schema.org (in JSON-LD)](http://schema.org/)                                                    | schema_org    | application/vnd.schemaorg.ld+json      | yes     | yes     |
+| [RDF XML](http://www.w3.org/TR/rdf-syntax-grammar/)                                              | rdf_xml       | application/rdf+xml                    | no      | yes     |
+| [RDF Turtle](http://www.w3.org/TeamSubmission/turtle/)                                           | turtle        | text/turtle                            | no      | yes     |
+| [CSL-JSON](https://citationstyles.org/)                                                          | csl           | application/vnd.citationstyles.csl+json | yes    | yes     |
+| [Formatted text citation](https://citationstyles.org/)                                           | citation      | text/x-bibliography                    | no      | yes     |
+| [Codemeta](https://codemeta.github.io/)                                                          | codemeta      | application/vnd.codemeta.ld+json       | yes     | yes     |
+| [Citation File Format (CFF)](https://citation-file-format.github.io/)                            | cff           | application/vnd.cff+yaml               | yes     | yes     |
+| [JATS](https://jats.nlm.nih.gov/)                                                                | jats          | application/vnd.jats+xml               | no      | yes     |
+| [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)                                       | csv           | text/csv                               | no      | yes     |
+| [BibTex](http://en.wikipedia.org/wiki/BibTeX)                                                    | bibtex        | application/x-bibtex                   | yes     | yes     |
+| [RIS](http://en.wikipedia.org/wiki/RIS_(file_format))                                            | ris           | application/x-research-info-systems    | yes     | yes     |
+| [InvenioRDM](https://inveniordm.docs.cern.ch/reference/metadata/)                                | inveniordm    | application/vnd.inveniordm.v1+json     | later   | later   |
+| [JSON Feed](https://www.jsonfeed.org/)                                                           | json_feed_item | application/feed+json                 | yes     | later   |
+
+## commonmeta (Go)
+
+commonmeta is a Go module to implement Commonmeta. Use commonmeta to convert scholarly metadata in a variety of formats, listed below. Commonmeta is work in progress, the first release was on April 19, 2024.
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/front-matter/commonmeta.svg)](https://pkg.go.dev/github.com/front-matter/commonmeta)
+
+| Format                                                                                           | Name          | Content Type                           | Read    | Write   |
+| ------------------------------------------------------------------------------------------------ | ------------- | -------------------------------------- | ------- | ------- |
+| [Commonmeta](https://docs.commonmeta.org)  | commonmeta    | application/vnd.commonmeta+json        | yes     | yes     |
+| [CrossRef XML](https://www.crossref.org/schema/documentation/unixref1.1/unixref1.1.html) | crossrefxml      | application/vnd.crossref.unixref+xml   | yes | yes |
+| [Crossref](https://api.crossref.org)                                                             | crossref | application/vnd.crossref+json          | yes     | no     |
+| [DataCite](https://api.datacite.org/)                                                            | datacite | application/vnd.datacite.datacite+json | yes     | yes |
+| [Schema.org (in JSON-LD)](http://schema.org/)                                                    | schemaorg    | application/vnd.schemaorg.ld+json      | later     | yes   |
+| [RDF XML](http://www.w3.org/TR/rdf-syntax-grammar/)                                              | rdf       | application/rdf+xml                    | no      | later   |
+| [RDF Turtle](http://www.w3.org/TeamSubmission/turtle/)                                           | turtle        | text/turtle                            | no      | later   |
+| [CSL-JSON](https://citationstyles.org/)                                                     | csl      | application/vnd.citationstyles.csl+json | later | yes   |
+| [Formatted text citation](https://citationstyles.org/)                                           | citation      | text/x-bibliography                    | n/a     | later     |
+| [Codemeta](https://codemeta.github.io/)                                                          | codemeta      | application/vnd.codemeta.ld+json       | later | later |
+| [Citation File Format (CFF)](https://citation-file-format.github.io/)                            | cff           | application/vnd.cff+yaml               | later | later |
+| [JATS](https://jats.nlm.nih.gov/)                                                                | jats          | application/vnd.jats+xml               | later   | later   |
+| [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)                                       | csv           | text/csv                               | no      | later   |
+| [BibTex](http://en.wikipedia.org/wiki/BibTeX)                                                    | bibtex        | application/x-bibtex                   | later | later   |
+| [RIS](http://en.wikipedia.org/wiki/RIS_(file_format))                                            | ris           | application/x-research-info-systems    | later | later   |
+| [InvenioRDM](https://inveniordm.docs.cern.ch/reference/metadata/)                                | inveniordm    | application/vnd.inveniordm.v1+json     | later | later   |
+| [JSON Feed](https://www.jsonfeed.org/)                                                           | jsonfeed     | application/feed+json    | later | later     |
+
+_commonmeta_: the Commonmeta format is the native format for the library and used internally.
+_Planned_: we plan to implement this format for the v1.0 public release.  
+_Later_: we plan to implement this format in a later release.

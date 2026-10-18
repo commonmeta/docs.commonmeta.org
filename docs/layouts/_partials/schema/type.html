@@ -1,0 +1,19 @@
+{{- /* Render the type of a JSON Schema node as HTML: $ref link, array of ..., or primitive. */ -}}
+{{- $p := . -}}
+{{- $s := "<code>any</code>" -}}
+{{- if reflect.IsMap $p -}}
+  {{- with index $p "$ref" -}}
+    {{- $name := path.Base . -}}
+    {{- $s = printf `<a href="#%s"><code>%s</code></a>` (anchorize $name) $name -}}
+  {{- else -}}
+    {{- with $p.type -}}
+      {{- if eq . "array" -}}
+        {{- $s = printf "array of %s" (partial "schema/type.html" $p.items) -}}
+      {{- else -}}
+        {{- $s = printf "<code>%s</code>" . -}}
+        {{- with $p.format }}{{ $s = printf "%s (%s)" $s . }}{{ end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $s -}}

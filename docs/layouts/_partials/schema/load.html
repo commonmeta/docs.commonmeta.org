@@ -1,0 +1,3 @@
+{{- /* Load the current Commonmeta JSON Schema from static/. Use with partialCached. */ -}}
+{{- $path := printf "static/commonmeta_v%s.json" site.Params.schemaVersion -}}
+{{- return (os.ReadFile $path | transform.Unmarshal) -}}

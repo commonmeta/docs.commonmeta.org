@@ -1,0 +1,7 @@
+{{- /*
+Render the full source of the current Commonmeta JSON Schema with syntax highlighting.
+
+@example {{< schema-source >}}
+*/ -}}
+{{- $path := printf "static/commonmeta_v%s.json" site.Params.schemaVersion -}}
+{{- transform.Highlight (os.ReadFile $path) "json" -}}

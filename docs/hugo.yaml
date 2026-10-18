@@ -1,0 +1,74 @@
+baseURL: https://docs.commonmeta.org/
+title: Commonmeta Documentation
+languageCode: en-us
+enableGitInfo: true
+enableRobotsTXT: true
+disableKinds: [taxonomy, term]
+
+module:
+  imports:
+    - path: github.com/imfing/hextra
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+
+outputs:
+  home: [html, rss, llms]
+
+menu:
+  main:
+    - name: Docs
+      pageRef: /introduction
+      weight: 1
+    - name: Schema
+      pageRef: /schema
+      weight: 2
+    - name: Search
+      weight: 3
+      params:
+        type: search
+    - name: GitHub
+      weight: 4
+      url: https://github.com/commonmeta/commonmeta
+      params:
+        icon: github
+    - name: Mastodon
+      weight: 5
+      url: https://hachyderm.io/@mfenner
+      params:
+        icon: mastodon
+
+params:
+  # Version of the current Commonmeta JSON Schema, served from static/
+  schemaVersion: "1.0"
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: images/icon.png
+      dark: images/icon.png
+      height: 24
+      width: 24
+  page:
+    width: normal
+  theme:
+    default: system
+    displayToggle: true
+  footer:
+    displayCopyright: true
+    displayPoweredBy: false
+  displayUpdatedDate: true
+  editURL:
+    enable: true
+    base: https://github.com/commonmeta/commonmeta/edit/main/docs/content
+  highlight:
+    copy:
+      enable: true
+      display: hover
+  search:
+    enable: true
+    type: flexsearch
