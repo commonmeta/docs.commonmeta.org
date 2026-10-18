@@ -1,4 +1,4 @@
-module github.com/commonmeta/commonmeta/docs
+module github.com/commonmeta/commonmeta.org
 
 go 1.24.13
 
