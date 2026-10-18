@@ -26,4 +26,4 @@ etc. The schema reference page is generated from the version set in `params.sche
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/commonmeta/commonmeta.org/blob/main/LICENSE).
+This project is licensed under the [MIT License](https://github.com/commonmeta/docs.commonmeta.org/blob/main/LICENSE).

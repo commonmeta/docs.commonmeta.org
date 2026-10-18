@@ -33,7 +33,7 @@ menu:
         type: search
     - name: GitHub
       weight: 4
-      url: https://github.com/commonmeta/commonmeta.org
+      url: https://github.com/commonmeta/docs.commonmeta.org
       params:
         icon: github
     - name: Mastodon
@@ -64,7 +64,7 @@ params:
   displayUpdatedDate: true
   editURL:
     enable: true
-    base: https://github.com/commonmeta/commonmeta.org/edit/main/content
+    base: https://github.com/commonmeta/docs.commonmeta.org/edit/main/content
   highlight:
     copy:
       enable: true
